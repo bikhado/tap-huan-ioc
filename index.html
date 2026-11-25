@@ -248,22 +248,14 @@
     #ioc-demo-flow .t1-run:hover{filter:brightness(1.06)}
     #ioc-demo-flow .t1-run-all{flex:none;min-height:48px;padding:0 16px;border-color:var(--c-accent);color:var(--c-accent-text);font-weight:700}
     #ioc-demo-flow a.t1-live{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;white-space:nowrap}
-    /* Mã QR mở bản slide trên GitHub Pages (link rút gọn tinyurl): góc màn Bắt đầu và thẻ lớn ở màn Cảm ơn. Mã luôn
+    /* Mã QR mở bản slide trên GitHub Pages (link rút gọn tinyurl): ở góc phải trên màn Bắt đầu và màn Cảm ơn. Mã luôn
        màu xanh than trên nền trắng để máy chiếu mờ vẫn quét được. */
     #ioc-demo-flow .welcome{position:relative}
     #ioc-demo-flow .xa-qr-code{display:block;background:#fff;border-radius:8px}
     #ioc-demo-flow .xa-qr-corner{position:absolute;top:0;right:0;display:grid;justify-items:center;gap:6px;padding:8px;border:1px solid var(--c-line);border-radius:14px;background:var(--c-surface);color:var(--c-muted);font-size:13px;font-weight:600;text-decoration:none}
     #ioc-demo-flow .xa-qr-corner .xa-qr-code{width:104px;height:104px}
     #ioc-demo-flow .xa-qr-corner:hover{border-color:var(--c-accent);color:var(--c-fg)}
-    #ioc-demo-flow .xa-qr-card{justify-self:center;display:flex;align-items:center;gap:20px;padding:14px 22px 14px 14px;border:1px solid var(--c-line);border-radius:18px;background:var(--c-surface);text-align:left}
-    #ioc-demo-flow .xa-qr-card .xa-qr-code{width:132px;height:132px;flex:none}
-    #ioc-demo-flow .welcome.xa-thanks{gap:calc(var(--c-fs)*1)}
-    #ioc-demo-flow .xa-qr-text{display:grid;gap:4px}
-    #ioc-demo-flow .xa-qr-text strong{font-size:22px;color:var(--c-fg)}
-    #ioc-demo-flow .xa-qr-text span{color:var(--c-muted)}
-    #ioc-demo-flow .xa-qr-text a{font-size:22px;font-weight:700;color:var(--c-accent-text);text-decoration:none;overflow-wrap:anywhere}
     @media (max-width:900px){#ioc-demo-flow .xa-qr-corner{position:static;justify-self:center;order:99}}
-    @media (max-width:560px){#ioc-demo-flow .xa-qr-card{flex-direction:column;text-align:center;padding:14px}#ioc-demo-flow .xa-qr-text strong,#ioc-demo-flow .xa-qr-text a{font-size:18px}}
     /* Màn Cảm ơn. */
     #ioc-demo-flow .xa-thanks-title{font-size:clamp(40px,5.6vw,76px)}
     #ioc-demo-flow .xa-thanks-qa{justify-self:center;margin:0;padding:6px 20px;border:1px solid var(--c-accent);border-radius:999px;color:var(--c-accent-text);font-weight:700;letter-spacing:.04em}
@@ -623,11 +615,11 @@
 
 <section id="ioc-p-thanks" data-panel-body="thanks" role="tabpanel" hidden>
   <div class="welcome xa-thanks">
+    <a class="xa-qr-corner" href="https://tinyurl.com/taphuan-ioc-capxa" target="_blank" rel="noopener noreferrer" title="Quét mã để mở slide trên điện thoại"><svg class="xa-qr-code" role="img" aria-label="Mã QR mở slide tập huấn: tinyurl.com/taphuan-ioc-capxa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#0b2540" d="M2 2.5h7m1 0h1m4 0h2m2 0h1m4 0h7M2 3.5h1m5 0h1m2 0h1m1 0h2m7 0h1m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m2 0h3m1 0h6m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h4m2 0h4m3 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m2 0h3m2 0h1m3 0h1m3 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m1 0h1m3 0h3m7 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 9.5h4m6 0h1M2 10.5h1m1 0h1m3 0h2m2 0h2m1 0h1m1 0h1m3 0h1m3 0h1m2 0h1m1 0h1M4 11.5h4m1 0h1m1 0h2m1 0h1m2 0h2m1 0h6m3 0h2M3 12.5h1m2 0h3m6 0h3m1 0h1m1 0h1m2 0h1m1 0h3m1 0h1M4 13.5h3m4 0h1m1 0h1m2 0h1m3 0h4m2 0h2M2 14.5h3m3 0h1m3 0h1m2 0h4m3 0h1m1 0h1m5 0h1M2 15.5h2m5 0h1m1 0h2m1 0h5m2 0h1m1 0h3m3 0h2M2 16.5h5m1 0h1m3 0h1m1 0h1m2 0h1m1 0h3m1 0h3m4 0h1M4 17.5h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h1m2 0h1m1 0h1m1 0h3M2 18.5h1m1 0h1m1 0h1m1 0h6m1 0h1m1 0h2m3 0h1m1 0h2m4 0h1M3 19.5h2m2 0h1m2 0h4m3 0h3m1 0h2m1 0h2m2 0h3M2 20.5h8m3 0h1m1 0h3m3 0h1m4 0h2m2 0h1M9 21.5h2m1 0h3m1 0h1m1 0h1m2 0h2m3 0h1M2 22.5h2m1 0h1m2 0h2m5 0h2m1 0h1m1 0h1m1 0h6m1 0h1M10 23.5h1m3 0h4m1 0h1m2 0h1m3 0h3m1 0h1M2 24.5h7m1 0h1m1 0h3m2 0h1m1 0h1m2 0h1m1 0h1m1 0h1m3 0h1M2 25.5h1m5 0h1m2 0h5m1 0h1m2 0h3m3 0h1m2 0h1M2 26.5h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h2m2 0h7m2 0h1M2 27.5h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h3m1 0h2m3 0h3m1 0h1M2 28.5h1m1 0h3m1 0h1m1 0h2m1 0h1m3 0h1m1 0h5m2 0h1m2 0h2M2 29.5h1m5 0h1m3 0h1m1 0h5m1 0h1m1 0h3m2 0h1M2 30.5h7m1 0h3m5 0h1m3 0h2m2 0h1m3 0h1"/></svg><span>Quét để xem slide</span></a>
     <div data-clone="logos"></div>
     <p class="welcome-mark">TRUNG TÂM ĐIỀU HÀNH THÔNG MINH TỈNH QUẢNG NGÃI</p>
     <h1 class="welcome-title xa-thanks-title">Trân trọng cảm ơn!</h1>
     <p class="text-muted">Cảm ơn quý lãnh đạo và các đồng chí đã theo dõi buổi tập huấn<br>“Khai thác dữ liệu và AI phục vụ điều hành cấp xã”.</p>
-    <div class="xa-qr-card"><svg class="xa-qr-code" role="img" aria-label="Mã QR mở slide tập huấn: tinyurl.com/taphuan-ioc-capxa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h33v33H0z"/><path stroke="#0b2540" d="M2 2.5h7m1 0h1m4 0h2m2 0h1m4 0h7M2 3.5h1m5 0h1m2 0h1m1 0h2m7 0h1m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m2 0h3m1 0h6m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h4m2 0h4m3 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m2 0h3m2 0h1m3 0h1m3 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m1 0h1m3 0h3m7 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 9.5h4m6 0h1M2 10.5h1m1 0h1m3 0h2m2 0h2m1 0h1m1 0h1m3 0h1m3 0h1m2 0h1m1 0h1M4 11.5h4m1 0h1m1 0h2m1 0h1m2 0h2m1 0h6m3 0h2M3 12.5h1m2 0h3m6 0h3m1 0h1m1 0h1m2 0h1m1 0h3m1 0h1M4 13.5h3m4 0h1m1 0h1m2 0h1m3 0h4m2 0h2M2 14.5h3m3 0h1m3 0h1m2 0h4m3 0h1m1 0h1m5 0h1M2 15.5h2m5 0h1m1 0h2m1 0h5m2 0h1m1 0h3m3 0h2M2 16.5h5m1 0h1m3 0h1m1 0h1m2 0h1m1 0h3m1 0h3m4 0h1M4 17.5h1m1 0h1m2 0h1m1 0h2m2 0h1m1 0h1m2 0h1m1 0h1m1 0h3M2 18.5h1m1 0h1m1 0h1m1 0h6m1 0h1m1 0h2m3 0h1m1 0h2m4 0h1M3 19.5h2m2 0h1m2 0h4m3 0h3m1 0h2m1 0h2m2 0h3M2 20.5h8m3 0h1m1 0h3m3 0h1m4 0h2m2 0h1M9 21.5h2m1 0h3m1 0h1m1 0h1m2 0h2m3 0h1M2 22.5h2m1 0h1m2 0h2m5 0h2m1 0h1m1 0h1m1 0h6m1 0h1M10 23.5h1m3 0h4m1 0h1m2 0h1m3 0h3m1 0h1M2 24.5h7m1 0h1m1 0h3m2 0h1m1 0h1m2 0h1m1 0h1m1 0h1m3 0h1M2 25.5h1m5 0h1m2 0h5m1 0h1m2 0h3m3 0h1m2 0h1M2 26.5h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h2m2 0h7m2 0h1M2 27.5h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h3m1 0h2m3 0h3m1 0h1M2 28.5h1m1 0h3m1 0h1m1 0h2m1 0h1m3 0h1m1 0h5m2 0h1m2 0h2M2 29.5h1m5 0h1m3 0h1m1 0h5m1 0h1m1 0h3m2 0h1M2 30.5h7m1 0h3m5 0h1m3 0h2m2 0h1m3 0h1"/></svg><div class="xa-qr-text"><strong>Quét mã để xem lại slide</strong><span>Mở bằng camera điện thoại, hoặc gõ:</span><a href="https://tinyurl.com/taphuan-ioc-capxa" target="_blank" rel="noopener noreferrer">tinyurl.com/taphuan-ioc-capxa</a></div></div>
     <p class="xa-thanks-qa">Hỏi đáp &amp; trao đổi</p>
     <div data-clone="meta"></div>
     <p class="text-muted">Thực hành tại <a class="xa-web-link" href="https://ioc.quangngai.gov.vn" target="_blank" rel="noopener noreferrer">ioc.quangngai.gov.vn</a>. Trên IOC, bấm trợ lý IOC → <strong>Hướng dẫn sử dụng</strong> để xem lại từng chức năng.</p>
