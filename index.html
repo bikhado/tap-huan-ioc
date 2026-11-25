@@ -317,6 +317,14 @@
     @keyframes offline-tap{0%{transform:translate(-50%,-50%) scale(.55);opacity:0}28%{opacity:1}100%{transform:translate(-50%,-50%) scale(1.55);opacity:0}}
     #ioc-demo-flow .offline-caption{min-height:68px;padding:8px 13px;border:1px solid var(--c-line);border-radius:10px;background:var(--c-fill);font-size:clamp(13px,1.4vw,17px);line-height:1.4}
     #ioc-demo-flow .offline-caption strong{display:block;color:var(--c-accent-text)}
+    #ioc-demo-flow .offline-caption{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 14px}
+    #ioc-demo-flow .offline-caption .offline-progress{grid-column:1/-1}
+    #ioc-demo-flow .offline-steps{display:flex;align-items:center;gap:8px}
+    #ioc-demo-flow .offline-steps .btn{min-height:44px;padding:0 16px;font-size:16px;font-weight:700}
+    #ioc-demo-flow .offline-steps .btn:disabled{opacity:.4;cursor:default}
+    #ioc-demo-flow .offline-next{background:var(--c-accent);color:var(--c-action-ink);border-color:transparent}
+    #ioc-demo-flow .offline-count{min-width:3.5ch;text-align:center;font-weight:700;color:var(--c-muted)}
+    @media (max-width:720px){#ioc-demo-flow .offline-caption{grid-template-columns:1fr}#ioc-demo-flow .offline-steps{justify-content:space-between}}
     #ioc-demo-flow .offline-progress{display:block;height:3px;margin-top:7px;overflow:hidden;border-radius:99px;background:var(--c-line)}
     #ioc-demo-flow .offline-progress i{display:block;width:100%;height:100%;background:var(--c-accent);transform:scaleX(0);transform-origin:left}
     @media (prefers-reduced-motion:reduce){#ioc-demo-flow .offline-focus.is-tap::after{animation:none;display:none}}
@@ -633,6 +641,7 @@
     </div>
     <div class="offline-caption">
       <div aria-live="polite"><strong></strong><p></p></div>
+      <div class="offline-steps"><button type="button" class="btn offline-prev" title="Cảnh trước (phím ← hoặc PageUp)">← Quay lại</button><span class="offline-count"></span><button type="button" class="btn offline-next" title="Cảnh sau (phím → hoặc PageDown)">Tiếp →</button></div>
       <span class="offline-progress" aria-hidden="true"><i></i></span>
     </div>
   </dialog>
@@ -758,6 +767,9 @@
       const play = viewer.querySelector('.offline-play');
       const zoom = viewer.querySelector('.offline-zoom');
       const close = viewer.querySelector('.offline-close');
+      const prev = viewer.querySelector('.offline-prev');
+      const nextBtn = viewer.querySelector('.offline-next');
+      const count = viewer.querySelector('.offline-count');
       const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
       let active = [];
       let index = 0;
@@ -853,6 +865,9 @@
         caption.querySelector('p').textContent = text;
         dwell = Math.max(4000, Math.min(6500, text.length * 46));
         bar.style.transform = 'scaleX(0)';
+        prev.disabled = index === 0;
+        nextBtn.disabled = index === active.length - 1;
+        count.textContent = (index + 1) + '/' + active.length;
         tabs.querySelectorAll('button').forEach((button, position) => {
           button.setAttribute('aria-pressed', String(position === index));
           if (position === index && viewer.open) button.scrollIntoView({ block: 'nearest', inline: 'nearest' });
@@ -901,10 +916,16 @@
         updatePlay();
       });
       zoom.addEventListener('click', () => setZoom(!frame.classList.contains('is-zoomed')));
+      prev.addEventListener('click', () => selectManually(index - 1));
+      nextBtn.addEventListener('click', () => selectManually(index + 1));
+      // Bàn phím, bút trình chiếu: ← / PageUp cảnh trước, → / PageDown cảnh sau. Đang phóng to ảnh thì mũi tên để cuộn ảnh.
       viewer.addEventListener('keydown', event => {
-        if (event.target === frame || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        const back = ['ArrowLeft', 'PageUp'].includes(event.key);
+        if (!back && !['ArrowRight', 'PageDown'].includes(event.key)) return;
+        if (event.target === frame && event.key.startsWith('Arrow')) return;
         event.preventDefault();
-        selectManually(index + (event.key === 'ArrowRight' ? 1 : -1));
+        event.stopPropagation();
+        selectManually(index + (back ? -1 : 1));
       });
     })();
   </script>
