@@ -8,6 +8,18 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
 </head>
 <body style="margin:0;background:#200b0e">
+<style>
+  #deck-loading{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;background:#200b0e radial-gradient(ellipse at top,#542025,#200b0e 62%);color:#ffe0a1;font-family:Inter,system-ui,"Segoe UI",Roboto,sans-serif;transition:opacity .4s ease}
+  #deck-loading.is-done{opacity:0;pointer-events:none}
+  #deck-loading .deck-loading-box{display:grid;justify-items:center;gap:14px;padding:24px;text-align:center}
+  #deck-loading .deck-loading-ring{width:56px;height:56px;border-radius:50%;border:4px solid rgba(230,182,61,.2);border-top-color:#e6b63d;animation:deck-loading-spin .9s linear infinite}
+  #deck-loading strong{font-size:20px;font-weight:700}
+  #deck-loading small{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#ebd1cb;opacity:.8}
+  @keyframes deck-loading-spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){#deck-loading .deck-loading-ring{animation-duration:2.4s}}
+</style>
+<noscript><style>#deck-loading{display:none}</style></noscript>
+<div id="deck-loading" role="status" aria-live="polite"><div class="deck-loading-box"><span class="deck-loading-ring" aria-hidden="true"></span><strong>Đang tải bộ slide tập huấn…</strong><small>Trung tâm Điều hành thông minh tỉnh Quảng Ngãi</small></div></div>
 <div id="ioc-demo-flow">
   <style>
     /* Tone đỏ rượu vang – vàng kim theo eCabinet (packages/design-tokens/src/palette.css, colors.css, effects.css).
@@ -847,6 +859,15 @@
       gate.querySelector('.login-gate-close').addEventListener('click', () => gate.close());
       // Phím mũi tên trong bảng chọn không chuyển slide phía sau.
       gate.addEventListener('keydown', event => { if (event.key !== 'Escape') event.stopPropagation(); });
+      const loading = document.getElementById('deck-loading');
+      const hideLoading = () => {
+        if (!loading || loading.classList.contains('is-done')) return;
+        // Không dùng requestAnimationFrame: tab chạy nền không gọi tới, màn chờ sẽ đứng mãi.
+        loading.classList.add('is-done');
+        setTimeout(() => loading.remove(), 450);
+      };
+      if (document.readyState === 'complete') hideLoading();
+      else addEventListener('load', hideLoading);
     })();
   </script>
 </body>
