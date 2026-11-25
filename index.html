@@ -71,7 +71,7 @@
     #ioc-demo-flow .screen{background:var(--c-fill)}
 
     #ioc-demo-flow{color:var(--c-fg);display:grid;gap:calc(var(--c-fs)*1.4)}
-    #ioc-demo-flow .journey{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:calc(var(--c-fs)*.5)}
+    #ioc-demo-flow .journey{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:calc(var(--c-fs)*.5)}
     #ioc-demo-flow .landmark{display:grid;gap:2px;align-content:center;padding:4px 6px;border:1px solid transparent;border-radius:6px;background:none;color:inherit;font:inherit;text-align:center;cursor:pointer}
     #ioc-demo-flow .landmark:hover{border-color:var(--c-line)}
     #ioc-demo-flow .landmark[aria-selected="true"]{border-color:var(--c-accent);color:var(--c-accent)}
@@ -210,6 +210,9 @@
     #ioc-demo-flow .t1-run:hover{filter:brightness(1.06)}
     #ioc-demo-flow .t1-run-all{flex:none;min-height:48px;padding:0 16px;border-color:var(--c-accent);color:var(--c-accent-text);font-weight:700}
     #ioc-demo-flow a.t1-live{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;white-space:nowrap}
+    /* Màn Cảm ơn. */
+    #ioc-demo-flow .xa-thanks-title{font-size:clamp(40px,5.6vw,76px)}
+    #ioc-demo-flow .xa-thanks-qa{justify-self:center;margin:0;padding:6px 20px;border:1px solid var(--c-accent);border-radius:999px;color:var(--c-accent-text);font-weight:700;letter-spacing:.04em}
     /* Bảng chọn tình trạng tài khoản trước khi mở IOC (nút Làm trực tiếp trên IOC). */
     #ioc-demo-flow .login-gate{box-sizing:border-box;width:min(1180px,calc(100% - 32px));max-height:calc(100% - 32px);margin:auto;padding:22px 26px;border:1px solid var(--c-line);border-radius:18px;background:var(--c-bg);color:var(--c-fg);box-shadow:0 30px 80px rgba(0,0,0,.55);overflow:auto}
     #ioc-demo-flow .login-gate::backdrop{background:#12080bd9}
@@ -366,7 +369,7 @@
 <nav class="journey" role="tablist" aria-label="Mạch trình bày tập huấn IOC cấp xã">
   <button type="button" class="landmark" role="tab" data-panel="welcome" aria-controls="ioc-p-welcome">
     <svg class="sketch" viewBox="0 0 160 80" aria-hidden="true"><rect x="8" y="4" width="144" height="68" rx="2" fill="var(--c-surface)" stroke="currentColor"/><path d="M54 26H106M36 40H124M58 52H102" fill="none" stroke="currentColor"/></svg>
-    <span class="num">0</span><span class="label">Chào mừng</span>
+    <span class="num">Bắt đầu</span><span class="label">Chào mừng</span>
   </button>
   <button type="button" class="landmark" role="tab" data-panel="today" aria-controls="ioc-p-today">
     <svg class="sketch" viewBox="0 0 160 80" aria-hidden="true"><rect x="20" y="10" width="44" height="56" fill="var(--c-surface)" stroke="currentColor"/><rect x="34" y="16" width="44" height="56" fill="var(--c-surface)" stroke="currentColor"/><path d="M42 30H70M42 40H70M42 50H62" stroke="currentColor"/><circle cx="118" cy="38" r="20" fill="none" stroke="currentColor"/><path d="M118 26V38L126 44" fill="none" stroke="currentColor"/></svg>
@@ -399,6 +402,10 @@
   <button type="button" class="landmark" role="tab" data-panel="close" aria-controls="ioc-p-close">
     <svg class="sketch" viewBox="0 0 160 80" aria-hidden="true"><rect x="40" y="8" width="80" height="64" rx="2" fill="var(--c-surface)" stroke="currentColor"/><path d="M40 24H120" stroke="currentColor"/><path d="M64 46L76 56L98 36" fill="none" stroke="currentColor"/></svg>
     <span class="num">8</span><span class="label">Chốt</span>
+  </button>
+  <button type="button" class="landmark" role="tab" data-panel="thanks" aria-controls="ioc-p-thanks">
+    <svg class="sketch" viewBox="0 0 160 80" aria-hidden="true"><path d="M80 70C52 52 40 40 40 26C40 15 48 8 58 8C67 8 74 13 80 21C86 13 93 8 102 8C112 8 120 15 120 26C120 40 108 52 80 70Z" fill="var(--c-surface)" stroke="currentColor"/></svg>
+    <span class="num">End</span><span class="label">Cảm ơn</span>
   </button>
 </nav>
 <section id="ioc-p-welcome" data-panel-body="welcome" role="tabpanel">
@@ -548,7 +555,20 @@
     <section class="branch"><h3>Giám sát quản lý nhiệm vụ</h3><p>Hỏi theo kỳ. Đọc trạng thái cảnh báo và thứ hạng rủi ro, rồi dùng phần so sánh và khuyến nghị để chọn việc cần giao.</p></section>
     <section class="branch"><h3>Chất lượng phục vụ dịch vụ công</h3><p>Mở “Vì sao đơn vị ở vị trí này?”. Chọn một tiêu chí còn hụt điểm, xác định việc cần cải thiện và thời điểm kiểm tra lại.</p></section>
   </div>
-  <div class="xa-actions"><button type="button" class="btn" data-open-panel="try">Quay lại ví dụ Trợ lý <span aria-hidden="true">↗</span></button></div>
+  <div class="xa-actions"><button type="button" class="btn" data-open-panel="try">Quay lại ví dụ Trợ lý <span aria-hidden="true">↗</span></button><button type="button" class="xa-primary" data-open-panel="thanks">Kết thúc <span aria-hidden="true">→</span></button></div>
+</section>
+
+<section id="ioc-p-thanks" data-panel-body="thanks" role="tabpanel" hidden>
+  <div class="welcome xa-thanks">
+    <div data-clone="logos"></div>
+    <p class="welcome-mark">TRUNG TÂM ĐIỀU HÀNH THÔNG MINH TỈNH QUẢNG NGÃI</p>
+    <h1 class="welcome-title xa-thanks-title">Trân trọng cảm ơn!</h1>
+    <p class="text-muted">Cảm ơn quý lãnh đạo và các đồng chí đã theo dõi buổi tập huấn<br>“Khai thác dữ liệu và AI phục vụ điều hành cấp xã”.</p>
+    <p class="xa-thanks-qa">Hỏi đáp &amp; trao đổi</p>
+    <div data-clone="meta"></div>
+    <p class="text-muted">Thực hành tại <a class="xa-web-link" href="https://ioc.quangngai.gov.vn" target="_blank" rel="noopener noreferrer">ioc.quangngai.gov.vn</a>. Trên IOC, bấm trợ lý IOC → <strong>Hướng dẫn sử dụng</strong> để xem lại từng chức năng.</p>
+    <div class="xa-actions"><button type="button" class="btn" data-open-panel="welcome">Về màn đầu</button></div>
+  </div>
 </section>
 
 <footer class="slide-credit">
@@ -859,6 +879,10 @@
       gate.querySelector('.login-gate-close').addEventListener('click', () => gate.close());
       // Phím mũi tên trong bảng chọn không chuyển slide phía sau.
       gate.addEventListener('keydown', event => { if (event.key !== 'Escape') event.stopPropagation(); });
+      root.querySelectorAll('[data-clone]').forEach(slot => {
+        const source = root.querySelector(slot.dataset.clone === 'logos' ? '#ioc-p-welcome .logos' : '#ioc-p-welcome .xa-meta-row');
+        if (source) slot.replaceWith(source.cloneNode(true));
+      });
       const loading = document.getElementById('deck-loading');
       const hideLoading = () => {
         if (!loading || loading.classList.contains('is-done')) return;
