@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kịch bản thuyết trình cấp xã</title>
+<style>
+  :root{
+    --bg:#200b0e;--surface:#391319;--card:#45161d;--line:#7a3a3f;--fg:#fff7ef;--muted:#ebd1cb;
+    --accent:#e6b63d;--accent-text:#ffe0a1;--ink:#29130e;--say:#fff3df;--fs:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg) radial-gradient(ellipse at top left,#542025,var(--bg) 62%);color:var(--fg);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:var(--fs);line-height:1.6}
+  .app{display:grid;grid-template-rows:auto auto 1fr auto;height:100vh;max-width:1440px;margin:auto;padding:14px 18px;gap:12px}
+  header{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+  header h1{margin:0;flex:1;min-width:16ch;font-size:clamp(17px,1.6vw,22px);color:var(--accent-text)}
+  header h1 small{display:block;font-size:12px;font-weight:500;color:var(--muted);opacity:.85}
+  .tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  button{font:inherit;cursor:pointer}
+  .btn{min-height:38px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font-size:14px;font-weight:600}
+  .btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+  .clock{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:14px;font-variant-numeric:tabular-nums}
+  .clock b{color:var(--accent-text);font-size:16px}
+  nav{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px}
+  nav button{display:grid;gap:2px;min-height:54px;padding:6px 4px;border:1px solid transparent;border-radius:10px;background:rgba(255,255,255,.04);color:var(--muted);font-size:12px;line-height:1.25;text-align:center}
+  nav button span{font-size:11px;opacity:.75}
+  nav button:hover{border-color:var(--line)}
+  nav button[aria-current="true"]{border-color:var(--accent);background:rgba(230,182,61,.14);color:var(--accent-text)}
+  main{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;min-height:0}
+  .say,.side section{border:1px solid var(--line);border-radius:14px;background:var(--card)}
+  .say{display:flex;flex-direction:column;min-height:0;padding:18px 22px}
+  .say-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .say-head h2{margin:0;flex:1;font-size:1.35em;color:var(--accent-text)}
+  .say-head .time{font-size:13px;color:var(--muted)}
+  .label{align-self:flex-start;display:inline-block;margin:6px 0 4px;padding:1px 10px;border-radius:999px;background:var(--accent);color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  .say-body{flex:1;overflow:auto;padding-right:6px}
+  .say-body p,.say-body li{color:var(--say);font-size:1.12em}
+  .say-body p{margin:.45em 0}
+  .say-body ul,.say-body ol{margin:.3em 0;padding-left:1.3em}
+  .say-body li{margin:.25em 0}
+  .say-body .warn{margin:12px 0 4px;padding:10px 14px;border-left:4px solid var(--accent);border-radius:8px;background:rgba(230,182,61,.1);font-size:1em;color:var(--fg)}
+  strong{color:var(--accent-text)}
+  .side{display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto}
+  .side section{padding:14px 16px}
+  .side h3{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text)}
+  .side ol,.side ul{margin:0;padding-left:1.25em;font-size:.92em}
+  .side li{margin:.3em 0}
+  .numbers{display:flex;flex-wrap:wrap;gap:8px}
+  .numbers span{padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:.85em}
+  .numbers span b{color:var(--accent-text)}
+  footer{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 16px;border:1px solid var(--accent);border-radius:14px;background:rgba(230,182,61,.08)}
+  footer .next-label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text)}
+  footer p{flex:1;min-width:20ch;margin:0;font-size:1.02em}
+  footer .nav-btns{display:flex;gap:8px}
+  .empty{color:var(--muted);font-size:.9em;font-style:italic}
+  @media (max-width:980px){
+    .app{height:auto;min-height:100vh}
+    main{grid-template-columns:1fr}
+    nav{grid-template-columns:repeat(5,minmax(0,1fr))}
+  }
+  @media print{
+    body{background:#fff;color:#111}
+    .app{height:auto}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Kịch bản thuyết trình · Khai thác dữ liệu và AI phục vụ điều hành cấp xã
+      <small>Đỗ Đức Kha · Chuyên viên tích hợp hệ thống (SI) · TTKDGP VNPT Quảng Ngãi · 27/11/2026 · Bản riêng cho người trình bày, không chiếu</small></h1>
+    <div class="tools">
+      <span class="clock" title="Thời gian từ lúc bấm Bắt đầu giờ">⏱ <b id="clock">00:00</b></span>
+      <button type="button" class="btn" id="clock-toggle">Bắt đầu giờ</button>
+      <button type="button" class="btn" id="clock-reset" title="Đặt lại đồng hồ">↺</button>
+      <button type="button" class="btn" id="font-down" title="Thu nhỏ chữ">A−</button>
+      <button type="button" class="btn" id="font-up" title="Phóng to chữ">A+</button>
+    </div>
+  </header>
+  <nav id="nav" aria-label="Các màn của slide"></nav>
+  <main>
+    <article class="say">
+      <div class="say-head"><h2 id="title"></h2><span class="time" id="time"></span></div>
+      <span class="label">Nói</span>
+      <div class="say-body" id="say"></div>
+    </article>
+    <aside class="side">
+      <section><h3>Làm trên slide / IOC</h3><div id="do"></div></section>
+      <section><h3>Số liệu cần nhớ</h3><div id="numbers"></div></section>
+      <section><h3>Mẹo &amp; dự phòng</h3><div id="tips"></div></section>
+    </aside>
+  </main>
+  <footer>
+    <span class="next-label">Chuyển →</span>
+    <p id="next"></p>
+    <div class="nav-btns"><button type="button" class="btn" id="prev">← Màn trước</button><button type="button" class="btn primary" id="go">Màn sau →</button></div>
+  </footer>
+</div>
+<script>
+  // Nội dung theo đúng thanh mốc của slide tập huấn cấp xã (server/training/decks/tap-huan-xa-web-offline.html).
+  // Bản chữ: docs/tap-huan-366/thuyet-trinh-cap-xa.md. Sửa nội dung thì sửa cả hai.
+  const screens = [
+    {
+      num: 'Bắt đầu', label: 'Chào mừng', minutes: 3,
+      say: [
+        'Kính chào các anh/chị. Em là **Đỗ Đức Kha**, chuyên viên tích hợp hệ thống, Trung tâm Kinh doanh Giải pháp VNPT Quảng Ngãi.',
+        'Hôm nay em xin được tập huấn về **khai thác dữ liệu và AI phục vụ điều hành cấp xã**. Mục tiêu: sau buổi này, lãnh đạo xã **tự mở IOC, tự hỏi Trợ lý** và đọc được số liệu của đơn vị mình để giao việc.',
+        'Em trình diễn trực tiếp trên IOC web với **2 dashboard** của xã: **Giám sát quản lý nhiệm vụ** và **Đánh giá chất lượng phục vụ dịch vụ công**. Cuối buổi có bản đồ số và phần hỏi đáp.',
+      ],
+      do: ['Rê chuột vào thẻ **Demo 1**, rồi **Demo 2** khi nhắc tên.', 'Bấm **Bắt đầu tập huấn** hoặc phím → sang màn 1.'],
+      numbers: [],
+      tips: ['Mở slide trước buổi để màn chờ tải xong (file nặng khoảng 2,8MB).'],
+      next: 'Trước khi vào công cụ, em xin bắt đầu từ câu hỏi: **lãnh đạo xã cần nắm gì trước khi giao việc?**',
+    },
+    {
+      num: '1', label: 'Điều hành hiện nay', minutes: 4,
+      say: [
+        'Với **nhiệm vụ**, mỗi tháng lãnh đạo thường hỏi ba câu: đơn vị đang ở **mức cảnh báo nào**, có **nhiệm vụ quá hạn** không, so với tháng trước **rủi ro tăng hay giảm**.',
+        'Ba câu này **Trợ lý IOC** trả lời trong một báo cáo: có cảnh báo, so sánh và khuyến nghị. **Dashboard** để đối chiếu con số và nhìn bức tranh tổng thể.',
+        'Với **dịch vụ công**: đơn vị đứng thứ mấy **trong toàn tỉnh**, tiêu chí nào kéo điểm xuống, nên cải thiện chỉ tiêu nào trước. Dashboard đã tổng hợp sẵn ở mục **“Vì sao đơn vị ở vị trí này?”**.',
+      ],
+      do: ['Rê chuột vào thẻ **Giám sát quản lý nhiệm vụ** khi nói về nhiệm vụ.', 'Rê sang thẻ **Chất lượng phục vụ dịch vụ công** khi nói về dịch vụ công.'],
+      numbers: [],
+      tips: ['Dịch vụ công xếp hạng **trong toàn tỉnh và trong khối xã, phường**, không phải cả nước.'],
+      next: 'Biết cần hỏi gì rồi, câu tiếp theo là: **đọc dữ liệu đó ở đâu, đọc thế nào cho đúng**. Mời các anh/chị sang phần 2.',
+    },
+    {
+      num: '2', label: 'Đọc để điều hành', minutes: 4,
+      say: [
+        'Mọi thứ bắt đầu từ một câu: **tháng này có việc gì cần chỉ đạo?** Để trả lời, đi qua 4 bước:',
+        { ol: [
+          '**Hỏi đúng phạm vi.** Mở Trợ lý, chọn đúng dashboard, bật **Phân tích chuyên sâu**, nêu rõ tháng. Hỏi chung chung hoặc sai lĩnh vực thì Trợ lý dễ hiểu nhầm.',
+          '**Đọc cảnh báo.** Trạng thái, số nhiệm vụ quá hạn và ý nghĩa của thứ hạng rủi ro.',
+          '**So sánh và kiểm tra.** Biến động so với kỳ trước. Số nào lệch bất thường thì mở dashboard đối chiếu cùng kỳ, cùng phạm vi, không ghi thẳng vào báo cáo.',
+          '**Chốt việc cần làm.** Chọn khuyến nghị phù hợp: giao ai, hạn khi nào, kiểm tra thế nào.',
+        ] },
+      ],
+      do: ['Rê chuột vào câu hỏi ở giữa, rồi lần lượt **4 nhánh** của sơ đồ khi nói từng bước.', 'Bấm **Xem ví dụ trên Trợ lý →**.'],
+      numbers: [],
+      tips: [],
+      next: 'Nói thì dễ hình dung hơn khi xem thật. Mời các anh/chị xem **một ví dụ trên Trợ lý**.',
+    },
+    {
+      num: '3', label: 'Lãnh đạo xem Trợ lý', minutes: 5,
+      say: [
+        'Đây là ví dụ thật của **UBND phường Nghĩa Lộ, tháng 10/2026**.',
+        'Câu hỏi mẫu nêu đủ ba ý: **đơn vị nào, kỳ nào, cần những gì** (cảnh báo, thứ hạng, so sánh, khuyến nghị). Các anh/chị chép nguyên câu này, chỉ đổi tên đơn vị và tháng.',
+        'Trợ lý trả lời ba phần:',
+        { ul: [
+          '**Cảnh báo:** An toàn, hạng rủi ro **24/25**.',
+          '**So sánh:** tháng 9 và tháng 10 đều **0 nhiệm vụ quá hạn**.',
+          '**Khuyến nghị:** tiếp tục theo dõi hạn xử lý, đối chiếu số nhiệm vụ tháng 9 đang lệch giữa các nguồn.',
+        ] },
+        { warn: 'Nói rõ: bảng xếp **rủi ro cao ở đầu**. Hạng 24/25 nghĩa là **ít rủi ro**, không phải đứng gần chót. Mẫu số 25 là số đơn vị **có phát sinh nhiệm vụ** trong kỳ.' },
+      ],
+      do: ['Rê chuột vào **Câu hỏi mẫu**, rồi từng dòng của **Đọc câu trả lời**.', 'Muốn xem từng bước: **▶ Chạy tour Trợ lý** (tour ảnh, không cần mạng).'],
+      numbers: ['An toàn', 'Hạng rủi ro <b>24/25</b>', 'Tháng 9: <b>24/32</b>', '<b>0</b> quá hạn cả 2 tháng'],
+      tips: [],
+      next: 'Đó là kết quả. Bây giờ em xin **làm trực tiếp từ đầu** để các anh/chị thấy từng bước bấm ở đâu.',
+    },
+    {
+      num: '4', label: 'Quản lý nhiệm vụ', minutes: 10,
+      say: [
+        'Em xin làm trực tiếp một luồng. Các anh/chị có máy thì bấm **Làm trực tiếp trên IOC**: hệ thống hướng dẫn từng bước bấm ở đâu, giống hệt màn hình em đang làm.',
+        'Ở **bộ lọc**: luôn kiểm tra **đơn vị và kỳ báo cáo** trước khi đọc số.',
+        'Ở **4 thẻ số**: tổng nhiệm vụ, quá hạn, tỷ lệ quá hạn, tỷ lệ hoàn thành. Ô **Tháng trước, Cùng kỳ** để so sánh nhanh.',
+        'Tab **Cảnh báo & Khuyến nghị**: nhận định và đề xuất xử lý của dashboard.',
+        'Trong lúc chờ Trợ lý: Trợ lý đang đọc **đúng số liệu của dashboard này**, không lấy số của đơn vị khác.',
+      ],
+      do: [
+        'Bấm **Làm trực tiếp trên IOC ↗** → chọn tình trạng tài khoản → **Mở IOC**.',
+        'Trên IOC: bấm ô **Giám sát quản lý nhiệm vụ** (mở tab mới).',
+        'Chờ số liệu hiện đủ → **Đã tải xong**.',
+        'Phím **→**: bộ lọc → 4 thẻ số → hàng tab.',
+        'Trợ lý IOC → **Hỏi đáp AI Chatbot** → chọn dashboard → **Phân tích chuyên sâu** → câu hỏi đã điền sẵn → **Gửi**.',
+        'Chờ 1–2 phút (Trợ lý hỏi kỳ thì chọn) → **Đã có kết quả** → đọc báo cáo.',
+      ],
+      numbers: [],
+      tips: [
+        'Cần giải thích trên màn thật: bấm **»** ở góc bong bóng, trang sáng lại; xong bấm tab **Tiếp tục**.',
+        'Đã bấm vào trong dashboard thì phím → không ăn: bấm vào bong bóng hoặc **Tiếp**.',
+        'Câu hỏi mẫu ghi **tháng 10/2026**: tài khoản không có số tháng đó thì sửa tháng trước khi Gửi.',
+        'Mạng chậm, IOC lỗi: quay lại slide, bấm **Chạy toàn bộ** (tour ảnh).',
+      ],
+      next: 'Đó là nhiệm vụ. Phần thứ hai là dịch vụ công: câu hỏi không phải “có quá hạn không” mà là **“mình đứng thứ mấy và vì sao”**.',
+    },
+    {
+      num: '5', label: 'Chất lượng phục vụ công', minutes: 8,
+      say: [
+        'Dashboard này đi theo ba bước: **đọc điểm và hạng → vì sao ở vị trí này → chọn việc cải thiện**.',
+        'Ví dụ **Nghĩa Lộ năm 2026**: **72,52/100 điểm**, hạng **73/109 toàn tỉnh**, hạng **68/96 cùng khối**. Chỉ kém đơn vị ngay trên **0,05 điểm**: cải thiện một tiêu chí nhỏ là lên hạng.',
+        'Mục **“Vì sao đơn vị ở vị trí này?”** chỉ ra nhóm kéo điểm xuống. Với Nghĩa Lộ là **Công khai, minh bạch: 6/18, còn thiếu 12 điểm**.',
+        'Bảng **“Muốn tăng điểm”** xếp chỉ tiêu theo ưu tiên, có cột **Còn thiếu** và **Cần làm gì**. Chọn 1–2 dòng đầu, giao đầu mối, hẹn kỳ sau kiểm tra.',
+      ],
+      do: [
+        '**Làm trực tiếp trên IOC ↗** → **Mở IOC** → ô **Đánh giá chất lượng phục vụ dịch vụ công**.',
+        '**Đã tải xong** → phím → qua từng phần (IOC tự cuộn): điểm, xếp hạng, vì sao, 6 nhóm, biểu đồ, bảng ưu tiên, chi tiết.',
+      ],
+      numbers: ['<b>72,52</b>/100', 'Hạng <b>73/109</b> tỉnh', 'Hạng <b>68/96</b> khối', 'Kém đơn vị trên <b>0,05</b>', 'Công khai, minh bạch <b>6/18</b>'],
+      tips: [
+        'Số trên IOC là của **tài khoản đang đăng nhập**, có thể khác ví dụ Nghĩa Lộ: nói rõ “trên slide là Nghĩa Lộ, trên màn hình là đơn vị của tài khoản demo”.',
+        'Dự phòng: **Chạy toàn bộ** (tour ảnh).',
+      ],
+      next: 'Hai dashboard cho từng lĩnh vực. Muốn nhìn một lúc **địa bàn mình đứng ở đâu so với các xã khác** thì dùng bản đồ số.',
+    },
+    {
+      num: '6', label: 'Bản đồ số', minutes: 4,
+      say: [
+        'Tài khoản cấp xã mở **Bản đồ** là bản đồ **tự phóng tới địa bàn của mình**, viền vàng, vẫn thấy các xã xung quanh.',
+        'Thẻ **“Địa bàn của Anh/Chị”** ghi số liệu, mức đánh giá và **thứ hạng** so với các xã, phường khác.',
+        { ul: [
+          '**Nhiệm vụ quá hạn:** Nghĩa Lộ 0, An toàn, **đồng hạng 1** cùng 90 trên 94 xã, phường.',
+          '**Thu ngân sách:** 8.989 triệu đồng, **8,1%** tổng thu toàn tỉnh, **hạng 2/96**.',
+        ] },
+        'Tháng nào hạng tụt, lãnh đạo thấy ngay trên **một màn hình** và giao việc.',
+      ],
+      do: ['**▶ Chạy tour** (ảnh), hoặc **Làm trực tiếp trên IOC** → trợ lý IOC → **Bản đồ số**.', 'Chọn lớp **Nhiệm vụ quá hạn**, rồi **Thu ngân sách**.'],
+      numbers: ['Quá hạn <b>0</b> · đồng hạng <b>1</b> (90/94)', 'Thu <b>8.989</b> triệu', '<b>8,1%</b> toàn tỉnh', 'Hạng <b>2/96</b>'],
+      tips: ['“Đồng hạng 1 cùng 90 nơi” vì 90 xã cùng 0 quá hạn: nói rõ để không hiểu là đứng đầu một mình.'],
+      next: 'Giao việc xong chưa phải là hết. Phần quan trọng là **kỳ sau kiểm tra lại**.',
+    },
+    {
+      num: '7', label: 'Theo dõi kết quả', minutes: 3,
+      say: [
+        '**Nhiệm vụ:** giao đầu mối **đối chiếu số nhiệm vụ tháng 9** đang lệch giữa các nguồn. Kỳ sau hỏi Trợ lý về nhiệm vụ sắp đến hạn, kiểm tra lại trên dashboard.',
+        '**Dịch vụ công:** Nghĩa Lộ thiếu điểm ở **Công khai, minh bạch**. Mở chi tiết tiêu chí, xác định dữ liệu cần bổ sung, giao đầu mối, hẹn kỳ kiểm tra lại.',
+        'Nguyên tắc: **mỗi việc giao đều có người theo dõi và mốc kiểm tra**. Kỳ sau mở lại đúng câu hỏi đó để xem đã cải thiện chưa.',
+      ],
+      do: ['Rê chuột vào từng thẻ khi nói.', 'Muốn nhắc lại: **▶ Xem lại khuyến nghị và tiêu chí**.'],
+      numbers: [],
+      tips: [],
+      next: 'Em xin tóm lại cả buổi trong **một quy trình**.',
+    },
+    {
+      num: '8', label: 'Chốt', minutes: 2,
+      say: [
+        'Cả buổi chỉ có một quy trình: **mở Trợ lý → đọc cảnh báo → chốt việc**.',
+        { ul: [
+          '**Nhiệm vụ:** hỏi theo kỳ, đọc trạng thái cảnh báo và thứ hạng rủi ro, dùng so sánh và khuyến nghị để chọn việc giao.',
+          '**Dịch vụ công:** mở “Vì sao đơn vị ở vị trí này?”, chọn một tiêu chí còn hụt điểm, giao việc và hẹn kiểm tra.',
+        ] },
+        'Để thực hành: mở **ioc.quangngai.gov.vn**, đăng nhập tài khoản IOC của xã. Trên IOC, bấm trợ lý IOC → **Hướng dẫn sử dụng** để xem lại từng chức năng bất cứ lúc nào.',
+      ],
+      do: ['Bấm **Kết thúc →**.'],
+      numbers: [],
+      tips: [],
+      next: 'Cảm ơn và mời hỏi đáp.',
+    },
+    {
+      num: 'End', label: 'Cảm ơn', minutes: 0,
+      say: [
+        'Em xin **trân trọng cảm ơn** các anh/chị đã theo dõi. Bây giờ em xin dành thời gian để các anh/chị **hỏi đáp và trao đổi**.',
+        'Câu hỏi hay gặp:',
+        { ul: [
+          '**Trợ lý trả lời sai số?** Trợ lý đọc đúng số trên dashboard lúc hỏi; số bất thường thì mở dashboard đối chiếu cùng kỳ, cùng phạm vi.',
+          '**“Chưa tìm thấy số liệu thuộc đúng phạm vi đơn vị”?** Kỳ đó đơn vị chưa có số liệu: hỏi kỳ khác hoặc xem dashboard.',
+          '**Hạng rủi ro 24/25 tốt hay xấu?** Tốt: rủi ro cao xếp đầu; luôn đọc kèm mẫu số.',
+          '**Đăng nhập lần đầu cần gì?** Điện thoại cài app Authenticator; quét QR, nhập mã 6 số, đổi mật khẩu, đồng ý điều khoản.',
+          '**Mất điện thoại, không có mã?** Liên hệ quản trị IOC đặt lại xác thực hai lớp.',
+          '**Số liệu cập nhật khi nào?** Theo nguồn của từng dashboard; luôn xem kỳ báo cáo trước khi đọc.',
+          '**Xem trên điện thoại?** Có: app IOC Mobile hoặc trình duyệt điện thoại.',
+        ] },
+      ],
+      do: ['Để màn **Cảm ơn** trên slide trong lúc hỏi đáp.'],
+      numbers: [],
+      tips: ['Câu hỏi về số liệu cụ thể của xã: mở IOC bằng tài khoản xã đó để trả lời trên màn hình.'],
+      next: 'Kết thúc buổi tập huấn.',
+    },
+  ];
+
+  const rich = (text) => String(text)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/&lt;b&gt;/g, '<b>').replace(/&lt;\/b&gt;/g, '</b>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  const list = (items, tag = 'ul') => items.length ? `<${tag}>${items.map(item => `<li>${rich(item)}</li>`).join('')}</${tag}>` : '<p class="empty">Không có.</p>';
+  const block = (item) => typeof item === 'string' ? `<p>${rich(item)}</p>`
+    : item.ol ? list(item.ol, 'ol') : item.ul ? list(item.ul) : `<p class="warn">${rich(item.warn)}</p>`;
+
+  const nav = document.getElementById('nav');
+  let index = 0;
+  screens.forEach((screen, position) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.innerHTML = `<span>${screen.num}</span>${screen.label}`;
+    button.addEventListener('click', () => show(position));
+    nav.append(button);
+  });
+
+  function show(next) {
+    index = Math.max(0, Math.min(screens.length - 1, next));
+    const screen = screens[index];
+    nav.querySelectorAll('button').forEach((button, position) => button.setAttribute('aria-current', String(position === index)));
+    document.getElementById('title').textContent = `${screen.num} · ${screen.label}`;
+    document.getElementById('time').textContent = screen.minutes ? `khoảng ${screen.minutes} phút` : 'hỏi đáp';
+    document.getElementById('say').innerHTML = screen.say.map(block).join('');
+    document.getElementById('do').innerHTML = list(screen.do, 'ol');
+    document.getElementById('numbers').innerHTML = screen.numbers.length
+      ? `<div class="numbers">${screen.numbers.map(item => `<span>${rich(item)}</span>`).join('')}</div>` : '<p class="empty">Không có.</p>';
+    document.getElementById('tips').innerHTML = list(screen.tips);
+    document.getElementById('next').innerHTML = rich(screen.next);
+    document.getElementById('prev').disabled = index === 0;
+    document.getElementById('go').disabled = index === screens.length - 1;
+    document.getElementById('say').scrollTop = 0;
+    try { localStorage.setItem('thuyet-trinh-xa-screen', String(index)); } catch {}
+  }
+
+  document.getElementById('prev').addEventListener('click', () => show(index - 1));
+  document.getElementById('go').addEventListener('click', () => show(index + 1));
+  document.addEventListener('keydown', (event) => {
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (['ArrowRight', 'PageDown'].includes(event.key)) { event.preventDefault(); show(index + 1); }
+    else if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); show(index - 1); }
+    else if (event.key === 'Home') show(0);
+    else if (event.key === 'End') show(screens.length - 1);
+  });
+
+  // Cỡ chữ: A− / A+ (nhớ trên máy này).
+  const root = document.documentElement;
+  let fontSize = 18;
+  try { fontSize = Number(localStorage.getItem('thuyet-trinh-xa-font')) || 18; } catch {}
+  const setFont = (size) => {
+    fontSize = Math.max(14, Math.min(28, size));
+    root.style.setProperty('--fs', fontSize + 'px');
+    try { localStorage.setItem('thuyet-trinh-xa-font', String(fontSize)); } catch {}
+  };
+  setFont(fontSize);
+  document.getElementById('font-down').addEventListener('click', () => setFont(fontSize - 2));
+  document.getElementById('font-up').addEventListener('click', () => setFont(fontSize + 2));
+
+  // Đồng hồ bấm giờ cả buổi.
+  const clock = document.getElementById('clock');
+  const toggle = document.getElementById('clock-toggle');
+  let elapsed = 0, startedAt = 0, timer = 0;
+  const render = () => {
+    const total = Math.floor((elapsed + (startedAt ? Date.now() - startedAt : 0)) / 1000);
+    clock.textContent = `${String(Math.floor(total / 60)).padStart(2, '0')}:${String(total % 60).padStart(2, '0')}`;
+  };
+  toggle.addEventListener('click', () => {
+    if (startedAt) { elapsed += Date.now() - startedAt; startedAt = 0; clearInterval(timer); toggle.textContent = 'Tiếp tục giờ'; }
+    else { startedAt = Date.now(); timer = setInterval(render, 500); toggle.textContent = 'Tạm dừng giờ'; }
+    render();
+  });
+  document.getElementById('clock-reset').addEventListener('click', () => {
+    elapsed = 0; if (startedAt) startedAt = Date.now(); render();
+  });
+
+  let saved = 0;
+  try { saved = Number(localStorage.getItem('thuyet-trinh-xa-screen')) || 0; } catch {}
+  show(saved);
+</script>
+</body>
+</html>
