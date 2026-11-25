@@ -107,33 +107,39 @@
       say: [
         'Kính chào các anh/chị. Em là **Đỗ Đức Kha**, chuyên viên tích hợp hệ thống, Trung tâm Kinh doanh Giải pháp VNPT Quảng Ngãi.',
         'Hôm nay em xin được tập huấn về **khai thác dữ liệu và AI phục vụ điều hành cấp xã**. Mục tiêu: sau buổi này, lãnh đạo xã **tự mở IOC, tự hỏi Trợ lý** và đọc được số liệu của đơn vị mình để giao việc.',
+        'Trên IOC, lãnh đạo xã **điều hành trên dashboard**: dashboard cho cái nhìn tổng thể về số liệu, **Trợ lý AI** đọc dữ liệu đó để chỉ ra cảnh báo và gợi ý việc cần chỉ đạo.',
         'Em trình diễn trực tiếp trên IOC web với **2 dashboard** của xã: **Giám sát quản lý nhiệm vụ** và **Đánh giá chất lượng phục vụ dịch vụ công**. Cuối buổi có bản đồ số và phần hỏi đáp.',
       ],
       do: ['Rê chuột vào thẻ **Demo 1**, rồi **Demo 2** khi nhắc tên.', 'Bấm **Bắt đầu tập huấn** hoặc phím → sang màn 1.'],
       numbers: [],
       tips: ['Mở slide trước buổi để màn chờ tải xong (file nặng khoảng 2,8MB).'],
-      next: 'Trước khi vào công cụ, em xin bắt đầu từ câu hỏi: **lãnh đạo xã cần nắm gì trước khi giao việc?**',
+      next: 'Trước tiên, em xin giới thiệu **các dashboard xã đang có** và vai trò của dashboard, Trợ lý trong điều hành.',
     },
     {
-      num: '1', label: 'Điều hành hiện nay', minutes: 4,
+      num: '1', label: 'Dashboard của xã', minutes: 4,
       say: [
-        'Với **nhiệm vụ**, mỗi tháng lãnh đạo thường hỏi ba câu: đơn vị đang ở **mức cảnh báo nào**, có **nhiệm vụ quá hạn** không, so với tháng trước **rủi ro tăng hay giảm**.',
-        'Ba câu này **Trợ lý IOC** trả lời trong một báo cáo: có cảnh báo, so sánh và khuyến nghị. **Dashboard** để đối chiếu con số và nhìn bức tranh tổng thể.',
-        'Với **dịch vụ công**: đơn vị đứng thứ mấy **trong toàn tỉnh**, tiêu chí nào kéo điểm xuống, nên cải thiện chỉ tiêu nào trước. Dashboard đã tổng hợp sẵn ở mục **“Vì sao đơn vị ở vị trí này?”**.',
+        'Trung tâm điều hành cấp xã đang có **5 dashboard**: **Giám sát quản lý nhiệm vụ**, **Đánh giá chất lượng phục vụ dịch vụ công**, **Giám sát thu chi ngân sách**, **Giám sát phản ánh hiện trường**, **Giải ngân vốn đầu tư công**. Hôm nay demo 2 dashboard đầu; các dashboard còn lại dùng cùng cách.',
+        { ul: [
+          '**Dashboard** cho cái nhìn tổng thể về số liệu của xã theo kỳ: thẻ số, biểu đồ, bảng chi tiết.',
+          '**Trợ lý AI** đọc dữ liệu đó, chỉ ra cảnh báo, so sánh với kỳ trước và gợi ý việc cần làm.',
+          '**Lãnh đạo** chốt việc chỉ đạo: giao ai, hạn khi nào, kiểm tra thế nào.',
+        ] },
+        'Với **nhiệm vụ**: dashboard cho tổng nhiệm vụ, đã hoàn thành, quá hạn; Trợ lý trả lời đơn vị ở **mức cảnh báo nào**, so với tháng trước **rủi ro tăng hay giảm**.',
+        'Với **dịch vụ công**: dashboard cho điểm, thứ hạng **trong toàn tỉnh** và điểm từng nhóm tiêu chí; mục **“Vì sao đơn vị ở vị trí này?”** chỉ ra tiêu chí kéo điểm xuống.',
       ],
-      do: ['Rê chuột vào thẻ **Giám sát quản lý nhiệm vụ** khi nói về nhiệm vụ.', 'Rê sang thẻ **Chất lượng phục vụ dịch vụ công** khi nói về dịch vụ công.'],
-      numbers: [],
+      do: ['Rê chuột lần lượt vào 3 ô **Dashboard → Trợ lý AI → Lãnh đạo**.', 'Rê vào thẻ **Demo 1**, **Demo 2**, rồi dòng **Các dashboard khác của xã**.'],
+      numbers: ['<b>5</b> dashboard cấp xã', 'Demo <b>2</b> hôm nay'],
       tips: ['Dịch vụ công xếp hạng **trong toàn tỉnh và trong khối xã, phường**, không phải cả nước.'],
-      next: 'Biết cần hỏi gì rồi, câu tiếp theo là: **đọc dữ liệu đó ở đâu, đọc thế nào cho đúng**. Mời các anh/chị sang phần 2.',
+      next: 'Có dashboard rồi, câu tiếp theo là: **đi từ dữ liệu trên dashboard tới việc chỉ đạo** như thế nào. Mời các anh/chị sang phần 2.',
     },
     {
-      num: '2', label: 'Đọc để điều hành', minutes: 4,
+      num: '2', label: 'Điều hành từ dashboard', minutes: 4,
       say: [
         'Mọi thứ bắt đầu từ một câu: **tháng này có việc gì cần chỉ đạo?** Để trả lời, đi qua 4 bước:',
         { ol: [
-          '**Hỏi đúng phạm vi.** Mở Trợ lý, chọn đúng dashboard, bật **Phân tích chuyên sâu**, nêu rõ tháng. Hỏi chung chung hoặc sai lĩnh vực thì Trợ lý dễ hiểu nhầm.',
-          '**Đọc cảnh báo.** Trạng thái, số nhiệm vụ quá hạn và ý nghĩa của thứ hạng rủi ro.',
-          '**So sánh và kiểm tra.** Biến động so với kỳ trước. Số nào lệch bất thường thì mở dashboard đối chiếu cùng kỳ, cùng phạm vi, không ghi thẳng vào báo cáo.',
+          '**Mở dashboard.** Dashboard của lĩnh vực cần xem, chọn đúng đơn vị và kỳ báo cáo.',
+          '**Đọc dữ liệu.** Nhìn tổng thể thẻ số, biểu đồ, bảng chi tiết: tổng nhiệm vụ, quá hạn, điểm, thứ hạng.',
+          '**Hỏi Trợ lý ra cảnh báo.** Hỏi cùng kỳ, cùng phạm vi, bật **Phân tích chuyên sâu**: Trợ lý chỉ ra cảnh báo, so sánh với kỳ trước và khuyến nghị. Số nào lệch bất thường thì đối chiếu lại trên dashboard.',
           '**Chốt việc cần làm.** Chọn khuyến nghị phù hợp: giao ai, hạn khi nào, kiểm tra thế nào.',
         ] },
       ],
@@ -143,9 +149,9 @@
       next: 'Nói thì dễ hình dung hơn khi xem thật. Mời các anh/chị xem **một ví dụ trên Trợ lý**.',
     },
     {
-      num: '3', label: 'Lãnh đạo xem Trợ lý', minutes: 5,
+      num: '3', label: 'Trợ lý chỉ ra cảnh báo', minutes: 5,
       say: [
-        'Đây là ví dụ thật của **UBND phường Nghĩa Lộ, tháng 10/2026**.',
+        'Đọc xong dữ liệu trên dashboard thì hỏi Trợ lý. Đây là ví dụ thật của **UBND phường Nghĩa Lộ, tháng 10/2026**.',
         'Câu hỏi mẫu nêu đủ ba ý: **đơn vị nào, kỳ nào, cần những gì** (cảnh báo, thứ hạng, so sánh, khuyến nghị). Các anh/chị chép nguyên câu này, chỉ đổi tên đơn vị và tháng.',
         'Trợ lý trả lời ba phần:',
         { ul: [
@@ -236,10 +242,10 @@
     {
       num: '8', label: 'Chốt', minutes: 2,
       say: [
-        'Cả buổi chỉ có một quy trình: **mở Trợ lý → đọc cảnh báo → chốt việc**.',
+        'Cả buổi chỉ có một quy trình: **mở dashboard → đọc dữ liệu → hỏi Trợ lý ra cảnh báo → chốt việc**.',
         { ul: [
-          '**Nhiệm vụ:** hỏi theo kỳ, đọc trạng thái cảnh báo và thứ hạng rủi ro, dùng so sánh và khuyến nghị để chọn việc giao.',
-          '**Dịch vụ công:** mở “Vì sao đơn vị ở vị trí này?”, chọn một tiêu chí còn hụt điểm, giao việc và hẹn kiểm tra.',
+          '**Nhiệm vụ:** mở dashboard đọc tổng nhiệm vụ, quá hạn theo kỳ; hỏi Trợ lý cùng kỳ để ra cảnh báo, thứ hạng rủi ro, so sánh và khuyến nghị, rồi chọn việc giao.',
+          '**Dịch vụ công:** mở dashboard đọc điểm, thứ hạng, rồi “Vì sao đơn vị ở vị trí này?”; chọn một tiêu chí còn hụt điểm, giao việc và hẹn kiểm tra.',
         ] },
         'Để thực hành: mở **ioc.quangngai.gov.vn**, đăng nhập tài khoản IOC của xã. Trên IOC, bấm trợ lý IOC → **Hướng dẫn sử dụng** để xem lại từng chức năng bất cứ lúc nào.',
       ],
