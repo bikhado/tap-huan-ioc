@@ -6,6 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Khai thác dữ liệu và AI phục vụ điều hành cấp xã</title>
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<script>
+  /* Tone xanh VNPT: ?tone=vnpt hoặc lựa chọn đã lưu; đặt sớm để màn tải cũng đúng tone. */
+  try{var t=new URLSearchParams(location.search).get('tone')||localStorage.getItem('ioc-deck-tone');if(t==='vnpt')document.documentElement.setAttribute('data-tone','vnpt');}catch(e){}
+</script>
+<style>
+  html[data-tone="vnpt"] body{background:#021a33!important}
+  html[data-tone="vnpt"] #deck-loading{background:#021a33 radial-gradient(ellipse at top,#0b3f73,#021a33 62%);color:#bfe8fb}
+  html[data-tone="vnpt"] #deck-loading .deck-loading-ring{border-color:rgba(76,194,242,.2);border-top-color:#4cc2f2}
+  html[data-tone="vnpt"] #deck-loading small{color:#cfe2f3}
+</style>
 </head>
 <body style="margin:0;background:#200b0e">
 <style>
@@ -46,6 +56,16 @@
         radial-gradient(32rem 26rem at 15% 65%,color-mix(in srgb,var(--ec-accent) 9%,transparent),transparent 75%),
         linear-gradient(140deg,var(--c-surface),var(--c-bg) 85%);
     }
+    /* Tone xanh VNPT (bật bằng nút ở chân trang hoặc ?tone=vnpt): chỉ đổi 4 seed. */
+    html[data-tone="vnpt"] #ioc-demo-flow{--ec-primary:#0066b3;--ec-accent:#4cc2f2;--ec-paper:#f3f8fd;--ec-ink:#06223d}
+    html[data-tone="vnpt"] #ioc-demo-flow img.xa-card-icon{filter:drop-shadow(0 8px 12px rgba(2,16,34,.4))}
+    #ioc-demo-flow .slide-credit .tone-switch{position:absolute;left:0;display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 12px 0 8px;border:1px solid var(--c-line);border-radius:999px;background:transparent;color:var(--c-muted);font:inherit;font-size:13px;cursor:pointer}
+    #ioc-demo-flow .slide-credit .tone-switch:hover{color:var(--c-fg);border-color:var(--c-accent)}
+    #ioc-demo-flow .slide-credit .tone-switch:focus-visible{outline:2px solid var(--c-accent);outline-offset:2px}
+    #ioc-demo-flow .tone-switch .tone-dot{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.7)}
+    #ioc-demo-flow .tone-switch .tone-dot{background:linear-gradient(135deg,#0066b3 50%,#4cc2f2 50%)}
+    html[data-tone="vnpt"] #ioc-demo-flow .tone-switch .tone-dot{background:linear-gradient(135deg,#781c24 50%,#e6b63d 50%)}
+    @media (max-width:720px){#ioc-demo-flow .slide-credit .tone-switch{position:static}}
     #ioc-demo-flow{box-sizing:border-box;max-width:1100px;margin-inline:auto;padding:calc(var(--c-fs)*1.5) calc(var(--c-fs)*1);background:var(--c-bg);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:var(--c-fs);line-height:1.55}
     #ioc-demo-flow *,#ioc-demo-flow *::before,#ioc-demo-flow *::after{box-sizing:border-box}
     #ioc-demo-flow h1,#ioc-demo-flow h2,#ioc-demo-flow h3,#ioc-demo-flow h4,#ioc-demo-flow p{margin:0}
@@ -572,6 +592,7 @@
 </section>
 
 <footer class="slide-credit">
+    <button type="button" class="tone-switch" aria-pressed="false"><span class="tone-dot" aria-hidden="true"></span><span class="tone-label">Tone xanh VNPT</span></button>
     <span class="slide-credit-text">© Sản phẩm thuộc bản quyền TTKDGP VNPT Quảng Ngãi - Tập đoàn Bưu chính Viễn thông Việt Nam</span>
     <span class="notes-flag">Đang hiện ghi chú · N để ẩn</span>
   </footer>
@@ -600,6 +621,19 @@
   <script>
     (() => {
       const root=document.getElementById('ioc-demo-flow');
+      const toneBtn=root.querySelector('.tone-switch');
+      const applyTone=(tone)=>{
+        const vnpt=tone==='vnpt';
+        if(vnpt)document.documentElement.setAttribute('data-tone','vnpt');else document.documentElement.removeAttribute('data-tone');
+        toneBtn.setAttribute('aria-pressed',String(vnpt));
+        toneBtn.querySelector('.tone-label').textContent=vnpt?'Tone đỏ – vàng':'Tone xanh VNPT';
+      };
+      applyTone(document.documentElement.getAttribute('data-tone'));
+      toneBtn.addEventListener('click',()=>{
+        const next=document.documentElement.getAttribute('data-tone')==='vnpt'?'':'vnpt';
+        applyTone(next);
+        try{localStorage.setItem('ioc-deck-tone',next||'classic');}catch(e){}
+      });
       const stage=root.querySelector('.stage');
       function fit(){
         const w=root.clientWidth||innerWidth,h=root.clientHeight||innerHeight;
