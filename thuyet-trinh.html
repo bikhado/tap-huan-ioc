@@ -70,7 +70,7 @@
 <div class="app">
   <header>
     <h1>Kịch bản thuyết trình · Khai thác dữ liệu và AI phục vụ điều hành cấp xã
-      <small>Đỗ Đức Kha · Chuyên viên tích hợp hệ thống (SI) · TTKDGP VNPT Quảng Ngãi · 27/11/2026 · Bản riêng cho người trình bày, không chiếu</small></h1>
+      <small>Đỗ Đức Kha · Chuyên viên tích hợp hệ thống (SI) · TTKDGP VNPT Quảng Ngãi · 27/11/2026 · 08h15–09h30 (08h15–08h30 giới thiệu tổng quan IOC; 08h30–09h30 khai thác dashboard) · Bản riêng cho người trình bày, không chiếu</small></h1>
     <div class="tools">
       <span class="clock" title="Thời gian từ lúc bấm Bắt đầu giờ">⏱ <b id="clock">00:00</b></span>
       <button type="button" class="btn" id="clock-toggle">Bắt đầu giờ</button>
@@ -103,7 +103,7 @@
   // Bản chữ: docs/tap-huan-366/thuyet-trinh-cap-xa.md. Sửa nội dung thì sửa cả hai.
   const screens = [
     {
-      num: 'Bắt đầu', label: 'Chào mừng', minutes: 3,
+      num: 'Bắt đầu', label: 'Chào mừng', minutes: 3, at: '08:15–08:18',
       say: [
         'Kính chào các anh/chị. Em là **Đỗ Đức Kha**, chuyên viên tích hợp hệ thống, Trung tâm Kinh doanh Giải pháp VNPT Quảng Ngãi.',
         'Hôm nay em xin được tập huấn về **khai thác dữ liệu và AI phục vụ điều hành cấp xã**. Mục tiêu: sau buổi này, lãnh đạo xã **tự mở IOC, tự hỏi Trợ lý** và đọc được số liệu của đơn vị mình để giao việc.',
@@ -116,7 +116,7 @@
       next: 'Trước tiên, em xin giới thiệu **các dashboard xã đang có** và vai trò của dashboard, Trợ lý trong điều hành.',
     },
     {
-      num: '1', label: 'Dashboard của xã', minutes: 4,
+      num: '1', label: 'Dashboard của xã', minutes: 6, at: '08:18–08:24',
       say: [
         'Trung tâm điều hành cấp xã đang có **5 dashboard**: **Giám sát quản lý nhiệm vụ**, **Đánh giá chất lượng phục vụ dịch vụ công**, **Giám sát thu chi ngân sách**, **Giám sát phản ánh hiện trường**, **Giải ngân vốn đầu tư công**. Hôm nay demo 2 dashboard đầu; các dashboard còn lại dùng cùng cách.',
         { ul: [
@@ -133,7 +133,7 @@
       next: 'Có dashboard rồi, câu tiếp theo là: **đi từ dữ liệu trên dashboard tới việc chỉ đạo** như thế nào. Mời các anh/chị sang phần 2.',
     },
     {
-      num: '2', label: 'Điều hành từ dashboard', minutes: 4,
+      num: '2', label: 'Điều hành từ dashboard', minutes: 6, at: '08:24–08:30',
       say: [
         'Mọi thứ bắt đầu từ một câu: **tháng này có việc gì cần chỉ đạo?** Để trả lời, đi qua 4 bước:',
         { ol: [
@@ -149,7 +149,7 @@
       next: 'Nói thì dễ hình dung hơn khi xem thật. Mời các anh/chị xem **một ví dụ trên Trợ lý**.',
     },
     {
-      num: '3', label: 'Trợ lý chỉ ra cảnh báo', minutes: 5,
+      num: '3', label: 'Trợ lý chỉ ra cảnh báo', minutes: 7, at: '08:30–08:37',
       say: [
         'Đọc xong dữ liệu trên dashboard thì hỏi Trợ lý. Đây là ví dụ thật của **UBND phường Nghĩa Lộ, tháng 10/2026**.',
         'Câu hỏi mẫu nêu đủ ba ý: **đơn vị nào, kỳ nào, cần những gì** (cảnh báo, thứ hạng, so sánh, khuyến nghị). Các anh/chị chép nguyên câu này, chỉ đổi tên đơn vị và tháng.',
@@ -167,7 +167,7 @@
       next: 'Đó là kết quả. Bây giờ em xin **làm trực tiếp từ đầu** để các anh/chị thấy từng bước bấm ở đâu.',
     },
     {
-      num: '4', label: 'Quản lý nhiệm vụ', minutes: 10,
+      num: '4', label: 'Quản lý nhiệm vụ', minutes: 15, at: '08:37–08:52',
       say: [
         'Em xin làm trực tiếp một luồng. Các anh/chị có máy thì bấm **Làm trực tiếp trên IOC**: hệ thống hướng dẫn từng bước bấm ở đâu, giống hệt màn hình em đang làm.',
         'Ở **bộ lọc**: luôn kiểm tra **đơn vị và kỳ báo cáo** trước khi đọc số.',
@@ -193,7 +193,7 @@
       next: 'Đó là nhiệm vụ. Phần thứ hai là dịch vụ công: câu hỏi không phải “có quá hạn không” mà là **“mình đứng thứ mấy và vì sao”**.',
     },
     {
-      num: '5', label: 'Chất lượng phục vụ công', minutes: 8,
+      num: '5', label: 'Chất lượng phục vụ công', minutes: 12, at: '08:52–09:04',
       say: [
         'Dashboard này đi theo ba bước: **đọc điểm và hạng → vì sao ở vị trí này → chọn việc cải thiện**.',
         'Ví dụ **Nghĩa Lộ năm 2026**: **72,52/100 điểm**, hạng **73/109 toàn tỉnh**, hạng **68/96 cùng khối**. Chỉ kém đơn vị ngay trên **0,05 điểm**: cải thiện một tiêu chí nhỏ là lên hạng.',
@@ -212,7 +212,7 @@
       next: 'Hai dashboard cho từng lĩnh vực. Muốn nhìn một lúc **địa bàn mình đứng ở đâu so với các xã khác** thì dùng bản đồ số.',
     },
     {
-      num: '6', label: 'Bản đồ số', minutes: 4,
+      num: '6', label: 'Bản đồ số', minutes: 8, at: '09:04–09:12',
       say: [
         'Tài khoản cấp xã mở **Bản đồ** là bản đồ **tự phóng tới địa bàn của mình**, viền vàng, vẫn thấy các xã xung quanh.',
         'Thẻ **“Địa bàn của Anh/Chị”** ghi số liệu, mức đánh giá và **thứ hạng** so với các xã, phường khác.',
@@ -228,7 +228,7 @@
       next: 'Giao việc xong chưa phải là hết. Phần quan trọng là **kỳ sau kiểm tra lại**.',
     },
     {
-      num: '7', label: 'Theo dõi kết quả', minutes: 3,
+      num: '7', label: 'Theo dõi kết quả', minutes: 4, at: '09:12–09:16',
       say: [
         '**Nhiệm vụ:** giao đầu mối **đối chiếu số nhiệm vụ tháng 9** đang lệch giữa các nguồn. Kỳ sau hỏi Trợ lý về nhiệm vụ sắp đến hạn, kiểm tra lại trên dashboard.',
         '**Dịch vụ công:** Nghĩa Lộ thiếu điểm ở **Công khai, minh bạch**. Mở chi tiết tiêu chí, xác định dữ liệu cần bổ sung, giao đầu mối, hẹn kỳ kiểm tra lại.',
@@ -240,7 +240,7 @@
       next: 'Em xin tóm lại cả buổi trong **một quy trình**.',
     },
     {
-      num: '8', label: 'Chốt', minutes: 2,
+      num: '8', label: 'Chốt', minutes: 4, at: '09:16–09:20',
       say: [
         'Cả buổi chỉ có một quy trình: **mở dashboard → đọc dữ liệu → hỏi Trợ lý ra cảnh báo → chốt việc**.',
         { ul: [
@@ -255,7 +255,7 @@
       next: 'Cảm ơn và mời hỏi đáp.',
     },
     {
-      num: 'End', label: 'Cảm ơn', minutes: 0,
+      num: 'End', label: 'Cảm ơn', minutes: 10, at: '09:20–09:30',
       say: [
         'Em xin **trân trọng cảm ơn** các anh/chị đã theo dõi. Bây giờ em xin dành thời gian để các anh/chị **hỏi đáp và trao đổi**.',
         'Câu hỏi hay gặp:',
@@ -289,7 +289,7 @@
   screens.forEach((screen, position) => {
     const button = document.createElement('button');
     button.type = 'button';
-    button.innerHTML = `<span>${screen.num}</span>${screen.label}`;
+    button.innerHTML = `<span>${screen.num} · ${screen.at.split('–')[0]}</span>${screen.label}`;
     button.addEventListener('click', () => show(position));
     nav.append(button);
   });
@@ -299,7 +299,7 @@
     const screen = screens[index];
     nav.querySelectorAll('button').forEach((button, position) => button.setAttribute('aria-current', String(position === index)));
     document.getElementById('title').textContent = `${screen.num} · ${screen.label}`;
-    document.getElementById('time').textContent = screen.minutes ? `khoảng ${screen.minutes} phút` : 'hỏi đáp';
+    document.getElementById('time').textContent = `${screen.at} · ${screen.minutes} phút${screen.num === 'End' ? ' hỏi đáp' : ''}`;
     document.getElementById('say').innerHTML = screen.say.map(block).join('');
     document.getElementById('do').innerHTML = list(screen.do, 'ol');
     document.getElementById('numbers').innerHTML = screen.numbers.length
